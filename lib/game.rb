@@ -1,9 +1,8 @@
 require_relative "./introduction"
+require_relative "./mastermind"
 
 intro = Introduction.new
 intro.game_rule
-
-require_relative "./lib"
 
 game = Mastermind.new
 game.play_game
