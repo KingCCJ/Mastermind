@@ -1,4 +1,6 @@
-class Introduction
+require_relative "./mastermind"
+
+class Messages
   def game_rule
     system('clear')
     puts "Welcome to Mastermind\n\n"  
@@ -7,7 +9,7 @@ class Introduction
     puts "computer in a game of wits. The computer will choose"
     puts ",from a given list of colors, a secret color coded combo"
     puts "for you to guess.\n\n"
-    sleep 2
+    sleep 1
     puts "If you guess a correct color but in the wrong position"
     puts "you\'ll receive a white pin for every correct guess. Yet,"
     puts "for every correct color in the right position you guess"
@@ -19,6 +21,8 @@ class Introduction
     puts "Press \"Enter\" to continue."
     gets
   end 
+  
+  def start_message
+    puts "Here are your options: #{Mastermind::COLOR_OPTIONS}"
+  end
 end
-intro = Introduction.new
-intro.game_rule

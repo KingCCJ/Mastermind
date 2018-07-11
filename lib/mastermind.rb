@@ -1,9 +1,11 @@
+require_relative "./messages"
 class Mastermind
   attr_reader :secret_code
   
   COLOR_OPTIONS = ["r", "b", "g", "y", "o", "p"]
 
   def initialize
+    @messages = Messages.new
     @secret_code = []
   end
 
@@ -13,8 +15,8 @@ class Mastermind
 
   def play_game
     system ('clear')
-    puts "Here are your options: #{COLOR_OPTIONS}"
+    @messages.game_rule
+    @messages.start_message
     generate_code
   end
-
 end
