@@ -1,7 +1,6 @@
 require_relative "./messages"
 class Mastermind
   attr_reader :secret_code
-  attr_reader :guess_remaining
   
   COLOR_OPTIONS = ["r", "b", "g", "y", "o", "p"]
 
@@ -18,7 +17,8 @@ class Mastermind
 
   def play_game
     system ('clear')
-    # @messages.game_rule
+    @messages.game_rule
+    system ('clear')
     @messages.start_message(COLOR_OPTIONS)
     generate_code
     p @secret_code

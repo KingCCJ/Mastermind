@@ -1,6 +1,5 @@
 class Messages
   def game_rule
-    system('clear')
     puts "Welcome to Mastermind\n\n"  
     sleep 1
     puts "In this game, you \(the player\), will play against the"
