@@ -1,5 +1,3 @@
-require_relative "./mastermind"
-
 class Messages
   def game_rule
     system('clear')
@@ -22,7 +20,16 @@ class Messages
     gets
   end 
   
-  def start_message
-    puts "Here are your options: #{Mastermind::COLOR_OPTIONS}"
+  def start_message(color_options)
+    puts "Here are your options: #{color_options}"
+    puts "Please enter your guess one letter at a time."
+  end
+
+  def guesses(guess_remaining)
+    puts "You have #{guess_remaining} guesses remaining."
+  end
+  
+  def win_message
+    puts "Yay! You Won!"
   end
 end
