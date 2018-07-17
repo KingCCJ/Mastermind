@@ -21,7 +21,7 @@ class Messages
   
   def start_message(color_options)
     puts "Here are your options: #{color_options}"
-    puts "Please enter your guess one letter at a time."
+    # puts "Please enter your guess one letter at a time."
   end
 
   def guesses(guess_remaining)
@@ -30,5 +30,9 @@ class Messages
   
   def win_message
     puts "Yay! You Won!"
+  end
+
+  def lose_message
+    puts "What happened? You lost..."
   end
 end
