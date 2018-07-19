@@ -1,7 +1,9 @@
 require_relative "../lib/mastermind"
 
 RSpec.describe "Mastermind" do
-  let(:game) { Mastermind.new }
+  let(:messages) { double('Messages') }
+  let(:player_input) { double('PlayerInput') }
+  let(:game) { Mastermind.new(messages, player_input) }
 
   describe "#generate_code" do
     it "creates a 4 digit secret code for the player to guess" do
@@ -31,20 +33,23 @@ RSpec.describe "Mastermind" do
   end
 
   describe "#game_check" do
-    it "returns win message when game is won" do 
+    it "returns = win call" do 
       game.secret_code = ['R', 'O', 'R', 'Y']
       game.player_guess = ['R', 'O', 'R', 'Y']
 
-      expect(game.messages).to receive(:win_message)
+      expect(messages).to receive(:win_message)
       game.game_check
     end
 
-    it "returns lose message when game is lost" do
-      game.secret_code = ['R', 'O', 'R', 'Y']
-      game.player_guess = ['R', 'O', 'R', 'G']
+    context "when guess_remaining has 1 guess" do
+      it "returns = lost call if guess is wrong" do
+        game.secret_code = ['R', 'O', 'R', 'Y']
+        game.player_guess = ['R', 'O', 'R', 'G']
+        game.guess_remaining = 1
 
-      expect(game.messages).to receive(:lose_message)
-      game.game_check
+        expect(messages).to receive(:lose_message).once
+        game.game_check
+      end
     end
   end
 end

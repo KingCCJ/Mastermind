@@ -1,12 +1,12 @@
-require_relative "./messages"
 class Mastermind
   #Being used from my spec file to access and wirte test
   attr_accessor :secret_code, :player_guess, :messages, :guess_remaining
 
   COLOR_OPTIONS = ["r", "b", "g", "y", "o", "p"]
 
-  def initialize
-    @messages = Messages.new
+  def initialize(messages, player_input)
+    @messages = messages
+    @player_input = player_input
     @secret_code = []
     @player_guess = Array.new(4)
     @guess_remaining = 10
@@ -28,7 +28,7 @@ class Mastermind
   end
 
   def player_guess
-    @player_guess = gets.chomp.downcase.split(//)
+    @player_guess = @player_input.get_input
     p @player_guess
     game_check
   end 
