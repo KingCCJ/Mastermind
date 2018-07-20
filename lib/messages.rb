@@ -28,6 +28,14 @@ class Messages
     puts "You have #{guess_remaining} guesses remaining."
   end
   
+  def feedback_too_many
+    puts "You have too many items in your list! >:( STOP IT!"
+  end
+
+  def feedback_not_enough
+    puts "Ehhhh, where\'s the rest of your guess???" 
+  end
+  
   def win_message
     puts "Yay! You Won!"
   end

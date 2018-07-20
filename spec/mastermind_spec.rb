@@ -1,9 +1,11 @@
 require_relative "../lib/mastermind"
+require_relative "../lib/player_input"
 
 RSpec.describe "Mastermind" do
   let(:messages) { double('Messages') }
-  let(:player_input) { double('PlayerInput') }
-  let(:game) { Mastermind.new(messages, player_input) }
+  let(:player_input) { PlayerInput.new }
+  let(:feedback) { double('feedback') }
+  let(:game) { Mastermind.new(messages, player_input, feedback) }
 
   describe "#generate_code" do
     it "creates a 4 digit secret code for the player to guess" do
@@ -52,4 +54,17 @@ RSpec.describe "Mastermind" do
       end
     end
   end
+  
+  # describe "#player_guess" do 
+  #   context "when player_input length isn\'t 4" do
+  #     it "returns = too many call if > 4" do
+  #       game.player_guess = ['R', 'O', 'R', 'G', 'Y']
+  #       game.check_guess
+  #       allow(player_input).to receive(gets).and_return(['R', 'O', 'R', 'G', 'Y'])
+  #       expect(game).to receive(:incorrect_input).with(game.player_guess).and_return("You have too many items in your list! >:( STOP IT!")
+
+  #       game.check_guess
+  #     end
+  #   end
+  # end
 end

@@ -4,13 +4,14 @@ class Mastermind
 
   COLOR_OPTIONS = ["r", "b", "g", "y", "o", "p"]
 
-  def initialize(messages, player_input)
+  def initialize(messages, player_input, feedback, hist)
     @messages = messages
     @player_input = player_input
+    @feedback = feedback
+    @history = hist
     @secret_code = []
-    @player_guess = Array.new(4)
+    @player_guess = ['*', '*', '*', '*']
     @guess_remaining = 10
-    @history = []
   end
 
   def generate_code
@@ -21,32 +22,39 @@ class Mastermind
     system ('clear')
     @messages.game_rule
     system ('clear')
-    @messages.start_message(COLOR_OPTIONS)
     generate_code
-    p @secret_code
-    player_guess
+    check_guess
   end
 
-  def player_guess
+  def check_guess
+    @messages.start_message(COLOR_OPTIONS)
+    p @secret_code
+    puts ''
+    @history.show_hist
     @player_guess = @player_input.get_input
-    p @player_guess
-    game_check
+    if @player_guess.length != 4
+      system ('clear')
+      @feedback.incorrect_input(@player_guess)
+      check_guess
+    else
+      system ('clear')
+      game_check
+    end
   end 
 
   def game_check
     if @guess_remaining > 1
       @guess_remaining -= 1
       if win_condition
+        p @secret_code
         @messages.win_message
       else
-        #Making a note to return to later; 
-        #I added history so that I can store the guesses
-        #and return them after each incorrect guess
-        @history << @player_guess
+        @history.store(@player_guess)
         @messages.guesses(@guess_remaining)
-        player_guess 
+        check_guess 
       end
     else
+      p @secret_code
       @messages.lose_message
     end
   end
