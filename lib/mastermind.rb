@@ -28,15 +28,12 @@ class Mastermind
 
   def check_guess
     @messages.start_message(COLOR_OPTIONS)
-    puts "Mastermind code: [* * * *]" 
-    puts "Please enter a 4 digit guess"
-    puts ''
     @history.show_hist
     @player_guess = @player_input.get_input
     if @player_guess == ["c", "h", "e", "a", "t"]
       system ('clear')
       p @secret_code
-      game_check
+      check_guess
     elsif @player_guess.length != 4
       system ('clear')
       @feedback.incorrect_input(@player_guess)

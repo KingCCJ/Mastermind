@@ -22,6 +22,9 @@ class Messages
   
   def start_message(color_options)
     puts "Here are your options: #{color_options}"
+    puts "Mastermind code: [* * * *]" 
+    puts "Please enter a 4 digit guess"
+    puts ''
   end
 
   def guesses(guess_remaining)
