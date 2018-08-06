@@ -3,6 +3,7 @@ class Mastermind
   attr_accessor :secret_code, :player_guess, :messages, :guess_remaining
 
   COLOR_OPTIONS = ["r", "b", "g", "y", "o", "p"]
+  MAGIC_NUMBER = 4
 
   def initialize(messages, player_input, feedback, hist)
     @messages = messages
@@ -15,7 +16,7 @@ class Mastermind
   end
 
   def generate_code
-    @secret_code = COLOR_OPTIONS.sample(4)
+    @secret_code = COLOR_OPTIONS.sample(MAGIC_NUMBER)
   end
 
   def play_game
@@ -32,11 +33,11 @@ class Mastermind
     @player_guess = @player_input.get_input
     if @player_guess == ["c", "h", "e", "a", "t"]
       system ('clear')
-      p @secret_code
+      @messages.cheat(@secret_code)
       check_guess
-    elsif @player_guess.length != 4
+    elsif @player_guess.length != MAGIC_NUMBER
       system ('clear')
-      @feedback.incorrect_input(@player_guess)
+      @feedback.incorrect_input(@player_guess, MAGIC_NUMBER, @messages)
       check_guess
     else
       system ('clear')

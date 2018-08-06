@@ -51,4 +51,8 @@ class Messages
     puts "Mastermind's Code"
     puts "What happened? You lost..."
   end
+
+  def cheat(secret_code)
+    p secret_code
+  end
 end
