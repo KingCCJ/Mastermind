@@ -3,50 +3,72 @@ class Mastermind
   attr_accessor :secret_code, :player_guess, :messages, :guess_remaining
 
   COLOR_OPTIONS = ["r", "b", "g", "y", "o", "p"]
+  MAGIC_NUMBER = 4
 
-  def initialize(messages, player_input)
+  def initialize(messages, player_input, feedback, hist)
     @messages = messages
     @player_input = player_input
+    @feedback = feedback
+    @history = hist
     @secret_code = []
-    @player_guess = Array.new(4)
+    @player_guess = []
     @guess_remaining = 10
-    @history = []
   end
 
   def generate_code
-    @secret_code = COLOR_OPTIONS.sample(4)
+    @secret_code = COLOR_OPTIONS.sample(MAGIC_NUMBER)
   end
 
   def play_game
     system ('clear')
     @messages.game_rule
     system ('clear')
-    @messages.start_message(COLOR_OPTIONS)
     generate_code
-    p @secret_code
-    player_guess
+    check_guess
   end
 
-  def player_guess
+  def check_guess
+    @messages.start_message(COLOR_OPTIONS)
+    @history.show_hist
     @player_guess = @player_input.get_input
-    p @player_guess
-    game_check
+    if @player_guess == ["c", "h", "e", "a", "t"]
+      system ('clear')
+      @messages.cheat(@secret_code)
+      check_guess
+    elsif @player_guess.length != MAGIC_NUMBER
+      system ('clear')
+      @feedback.incorrect_input(@player_guess, MAGIC_NUMBER, @messages)
+      check_guess
+    else
+      system ('clear')
+      game_check
+    end
   end 
 
   def game_check
+
     if @guess_remaining > 1
       @guess_remaining -= 1
       if win_condition
+        p @secret_code
         @messages.win_message
       else
-        #Making a note to return to later; 
-        #I added history so that I can store the guesses
-        #and return them after each incorrect guess
-        @history << @player_guess
+        pins = @feedback.pin_check(@player_guess, @secret_code)
+        @history.store(@player_guess, pins)
+        @messages.pin_feedback(pins)
         @messages.guesses(@guess_remaining)
-        player_guess 
+        check_guess 
+      end
+    elsif @guess_remaining == 1
+      if win_condition
+        p @secret_code
+        @messages.win_message
+      else
+        p @secret_code
+        @messages.lose_message
       end
     else
+      p @secret_code
       @messages.lose_message
     end
   end
