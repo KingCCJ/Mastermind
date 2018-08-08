@@ -25,6 +25,6 @@ class Feedback
     if red_pins > 0
       white_pins -= red_pins
     end
-    pins = [white_pins, red_pins]
+    pins = {white: white_pins, red: red_pins}
   end
 end
