@@ -40,7 +40,7 @@ class Messages
   end
 
   def pin_feedback(pins)
-    puts "You have #{pins[0]} white and #{pins[1]} red pins"
+    puts "You have #{pins[:white]} white and #{pins[:red]} red pins"
   end
   
   def win_message
