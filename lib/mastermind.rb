@@ -5,11 +5,12 @@ class Mastermind
   COLOR_OPTIONS = ["r", "b", "g", "y", "o", "p"]
   MAGIC_NUMBER = 4
 
-  def initialize(messages, player_input, feedback, hist)
+  def initialize(messages, player_input, feedback, hist, comp)
     @messages = messages
     @player_input = player_input
     @feedback = feedback
     @history = hist
+    @comp_game = comp
     @secret_code = []
     @player_guess = []
     @guess_remaining = 10
@@ -24,7 +25,17 @@ class Mastermind
     @messages.game_rule
     system ('clear')
     generate_code
-    check_guess
+    game_mode
+  end
+
+  def game_mode
+    @messages.game_select
+    mode = gets.chomp.to_i
+    if mode == 1
+      check_guess
+    elsif mode == 2
+      @comp_game.play_game(@secret_code, @guess_remaining, @history, @feedback, COLOR_OPTIONS, MAGIC_NUMBER)
+    end
   end
 
   def check_guess

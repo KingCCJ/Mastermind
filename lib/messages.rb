@@ -55,4 +55,10 @@ class Messages
   def cheat(secret_code)
     p secret_code
   end
+
+  def game_select
+    puts "Please select a game mode by typing \"1\" or \"2\" in the space below:"
+    puts "1: Player V Comp"
+    puts "2: Comp V Comp"
+  end
 end
