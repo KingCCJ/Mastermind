@@ -32,6 +32,7 @@ class Mastermind
     @messages.game_select
     mode = gets.chomp.to_i
     if mode == 1
+      system('clear')
       check_guess
     elsif mode == 2
       @comp_game.play_game(@secret_code, @guess_remaining, @history, @feedback, COLOR_OPTIONS, MAGIC_NUMBER)
@@ -41,11 +42,14 @@ class Mastermind
   def check_guess
     @messages.start_message(COLOR_OPTIONS)
     @history.show_hist
+    @messages.enter_guess(MAGIC_NUMBER)
     @player_guess = @player_input.get_input
     if @player_guess == ["c", "h", "e", "a", "t"]
       system ('clear')
       @messages.cheat(@secret_code)
       check_guess
+    elsif @player_guess == ["q", "u", "i", "t"]
+      exit(0)
     elsif @player_guess.length != MAGIC_NUMBER
       system ('clear')
       @feedback.incorrect_input(@player_guess, MAGIC_NUMBER, @messages)

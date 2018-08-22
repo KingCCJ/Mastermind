@@ -15,7 +15,7 @@ class Messages
     puts "Be sparing with your guess, though."
     puts "You only get 10 guess to get it right."
     puts "Got it? Are you ready? Let\'s play.\n\n"
-    sleep 1.5
+    sleep 1
     puts "Press \"Enter\" to continue."
     gets
   end 
@@ -23,8 +23,12 @@ class Messages
   def start_message(color_options)
     puts "Here are your options: #{color_options}"
     puts "Mastermind code: [* * * *]" 
-    puts "Please enter a 4 digit guess"
+    # puts "Please enter a 4 digit guess"
     puts ''
+  end
+
+  def enter_guess(magic_number)
+    print "Please enter a #{magic_number} digit guess: "
   end
 
   def guesses(guess_remaining)
@@ -57,8 +61,9 @@ class Messages
   end
 
   def game_select
-    puts "Please select a game mode by typing \"1\" or \"2\" in the space below:"
+    puts "Please select a game mode by typing in its numeric value below"
     puts "1: Player V Comp"
     puts "2: Comp V Comp"
+    print "Game mode:"
   end
 end
