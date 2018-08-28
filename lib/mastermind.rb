@@ -5,19 +5,19 @@ class Mastermind
   COLOR_OPTIONS = ["r", "b", "g", "y", "o", "p"]
   MAGIC_NUMBER = 4
 
-  def initialize(messages, player_input, feedback, hist, comp)
+  def initialize(messages, feedback, hist, c_player)
     @messages = messages
-    @player_input = player_input
     @feedback = feedback
     @history = hist
-    @comp_game = comp
+    @comp_game = c_player
     @secret_code = []
     @player_guess = []
     @guess_remaining = 10
   end
 
   def generate_code
-    @secret_code = COLOR_OPTIONS.sample(MAGIC_NUMBER)
+    combos = COLOR_OPTIONS.repeated_permutation(MAGIC_NUMBER).to_a
+    @secret_code = combos.sample
   end
 
   def play_game
@@ -35,7 +35,7 @@ class Mastermind
       system('clear')
       check_guess
     elsif mode == 2
-      @comp_game.play_game(@secret_code, @guess_remaining, @history, @feedback, COLOR_OPTIONS, MAGIC_NUMBER)
+      @comp_game.play(@secret_code)
     end
   end
 
@@ -43,7 +43,7 @@ class Mastermind
     @messages.start_message(COLOR_OPTIONS)
     @history.show_hist
     @messages.enter_guess(MAGIC_NUMBER)
-    @player_guess = @player_input.get_input
+    @player_guess = get_input
     if @player_guess == ["c", "h", "e", "a", "t"]
       system ('clear')
       @messages.cheat(@secret_code)
@@ -86,6 +86,10 @@ class Mastermind
       p @secret_code
       @messages.lose_message
     end
+  end
+
+  def get_input
+    gets.chomp.downcase.split(//)
   end
 
   def win_condition

@@ -23,7 +23,6 @@ class Messages
   def start_message(color_options)
     puts "Here are your options: #{color_options}"
     puts "Mastermind code: [* * * *]" 
-    # puts "Please enter a 4 digit guess"
     puts ''
   end
 
@@ -65,5 +64,26 @@ class Messages
     puts "1: Player V Comp"
     puts "2: Comp V Comp"
     print "Game mode:"
+  end
+
+  def computer_player_start_message(secret_code)
+    system ('clear')
+    puts "Secret Code: #{secret_code}"
+    sleep 1
+  end
+
+  def computer_player_guess_message(guess_number, player_guess, possible_combos)
+    puts "\nGuess ##{guess_number}: #{player_guess}"
+    puts "There are " + possible_combos.size.to_s + " possibilites"
+    sleep 1
+  end
+
+  def computer_loses(secret_code)
+    puts "Uhhhh.... Guess the computer isn't that smart."
+    puts "Secret Code: #{@secret_code}"
+  end
+
+  def computer_win_message(guess, tries, secret_code)
+    puts "The Computer guessed the Secret Code: #{secret_code} in #{tries} tries."
   end
 end
