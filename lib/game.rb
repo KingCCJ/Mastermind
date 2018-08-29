@@ -1,17 +1,21 @@
 require_relative "./mastermind"
 require_relative "./messages"
-# require_relative "./player_input"
 require_relative "./feedback"
 require_relative "./history"
-# require_relative "./compvcomp"
+require_relative "./game_code"
+require_relative "./compvplayer"
 require_relative "./comp_player"
+require_relative "./pvp"
+require_relative "./playervcomp"
 
 messages = Messages.new
-# player_input = PlayerInput.new
 feedback = Feedback.new
 hist = History.new
-# comp = CompVsComp.new
-c_player = ComputerPlayer.new(feedback, messages)
+game_code = GameCode.new
+player_v_comp = PlayerVsComp.new(messages, feedback, hist, game_code)
+player_v_player = PlayerVsPlayer.new(messages, feedback, hist, game_code)
+comp_v_player = CompVsPlayer.new(messages, feedback, game_code)
+c_player = ComputerPlayer.new(feedback, messages, game_code)
 
-game = Mastermind.new(messages, feedback, hist, c_player)
+game = Mastermind.new(player_v_comp, comp_v_player, player_v_player, c_player, messages)
 game.play_game

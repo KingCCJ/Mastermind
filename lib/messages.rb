@@ -1,5 +1,6 @@
 class Messages
-  def game_rule
+  def game_rule(guess_limit)
+    system ('clear')
     puts "Welcome to Mastermind\n\n"  
     sleep 1
     puts "In this game, you \(the player\), will play against the"
@@ -13,7 +14,7 @@ class Messages
     puts "you\'ll receive a red pin.\n\n"
   
     puts "Be sparing with your guess, though."
-    puts "You only get 10 guess to get it right."
+    puts "You only get #{guess_limit} guess to get it right."
     puts "Got it? Are you ready? Let\'s play.\n\n"
     sleep 1
     puts "Press \"Enter\" to continue."
@@ -60,9 +61,12 @@ class Messages
   end
 
   def game_select
+    system ('clear')
     puts "Please select a game mode by typing in its numeric value below"
     puts "1: Player V Comp"
-    puts "2: Comp V Comp"
+    puts "2: Player V Player"
+    puts "3: Comp V Player"
+    puts "4: Comp V Comp"
     print "Game mode:"
   end
 

@@ -1,21 +1,22 @@
 class ComputerPlayer
 
-  COMBOS = Mastermind::COLOR_OPTIONS.repeated_permutation(4).to_a
-  INITIAL_GUESS = Mastermind::COLOR_OPTIONS.sample(4)
-
-  def initialize(feedback, messages)
+  COMBOS = GameCode::COLOR_OPTIONS.repeated_permutation(4).to_a
+  INITIAL_GUESS = GameCode::COLOR_OPTIONS.sample(4)
+  GUESS_LIMIT = Mastermind::GUESS_LIMIT
+  
+  def initialize(feedback, messages, game_code)
     @possible_combos = COMBOS
     @messages = messages
     @pins = feedback
+    @game_code = game_code
+    @secret_code = @game_code.generate_code
   end
 
-  def play(secret_code)
-    @secret_code = secret_code
+  def play
     @messages.computer_player_start_message(@secret_code)
-    guess_limit = 10
     guess_number = 0
     player_guess = INITIAL_GUESS
-    while guess_number <= guess_limit
+    while guess_number <= GUESS_LIMIT
       pins = @pins.pin_check(player_guess, @secret_code)
       update_combos(player_guess, pins)
       check_win(player_guess, guess_number)

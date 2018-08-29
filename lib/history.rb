@@ -10,8 +10,11 @@ class History
   end
 
   def show_hist
+    counter = 0
+    newcounter = 1
     @player_history.each do |history_entry|
-      puts "GUESS: #{history_entry[:guess]}    W: #{history_entry[:pins][:white]} R: #{history_entry[:pins][:red]}"
+      counter += newcounter
+      puts "GUESS ##{counter}: #{history_entry[:guess]}    W: #{history_entry[:pins][:white]} R: #{history_entry[:pins][:red]}"
     end
   end
 end
