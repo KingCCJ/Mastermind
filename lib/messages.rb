@@ -20,6 +20,10 @@ class Messages
     puts "Press \"Enter\" to continue."
     gets
   end 
+
+  def show_history(history)
+    puts history
+  end
   
   def start_message(color_options)
     puts "Here are your options: #{color_options}"
@@ -41,6 +45,10 @@ class Messages
 
   def feedback_not_enough
     puts "Ehhhh, where\'s the rest of your guess???" 
+  end
+
+  def not_option
+    puts "Sorry, but that's not an option."
   end
 
   def pin_feedback(pins)
@@ -84,10 +92,16 @@ class Messages
 
   def computer_loses(secret_code)
     puts "Uhhhh.... Guess the computer isn't that smart."
-    puts "Secret Code: #{@secret_code}"
+    puts "Secret Code: #{secret_code}"
   end
 
   def computer_win_message(guess, tries, secret_code)
     puts "The Computer guessed the Secret Code: #{secret_code} in #{tries} tries."
+  end
+
+  def select_secret_code(color_options)
+    system ('clear')
+    puts "Here are your options: #{color_options}"
+    print "Please enter a 4 digit code here: "
   end
 end

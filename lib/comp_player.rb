@@ -8,8 +8,7 @@ class ComputerPlayer
     @possible_combos = COMBOS
     @messages = messages
     @pins = feedback
-    @game_code = game_code
-    @secret_code = @game_code.generate_code
+    @secret_code = game_code.generate_code
   end
 
   def play

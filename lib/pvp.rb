@@ -3,8 +3,7 @@ class PlayerVsPlayer
     @messages = messages
     @feedback = feedback
     @history = hist
-    @game_code = game_code
-    @secret_code = @game_code.generate_code
+    @secret_code = game_code.generate_code
   end
 
   def play

@@ -6,15 +6,12 @@ class History
   end
   
   def store(player_guess, pins)
-    @player_history << {guess: player_guess, pins: pins}
+    @player_history << { guess: player_guess, pins: pins }
   end
 
-  def show_hist
-    counter = 0
-    newcounter = 1
-    @player_history.each do |history_entry|
-      counter += newcounter
-      puts "GUESS ##{counter}: #{history_entry[:guess]}    W: #{history_entry[:pins][:white]} R: #{history_entry[:pins][:red]}"
-    end
+  def render
+    @player_history.map.with_index do |history_entry, i|
+     "GUESS ##{i + 1}: #{history_entry[:guess]}   W: #{history_entry[:pins][:white]} R: #{history_entry[:pins][:red]}"
+    end.join("\n")
   end
 end
